@@ -1,6 +1,7 @@
 
 BIN_PATH=../build
-DATASET_NAME=zoom-5min
+DATASET_NAME=test6
+
 
 all: stats.html streams.html meetings.html frames.html
 
