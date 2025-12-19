@@ -1,0 +1,2 @@
+meeting_id,stream_id,conn_type,start_ts_s,end_ts_s,ip_src,tp_src,ip_dst,tp_dst,zoom_type,ssrc,start_rtp_ts,end_rtp_ts,pkts,bytes,audio_112_pkts,audio_99_pkts,audio_113_pkts
+0,0,udp_srv,1766155349,1766155612,192.168.88.72,49718,144.195.129.149,8801,16,16778241,2800993886,2824606736,15218,15107095,0,0,0
