@@ -1,8 +1,6 @@
 
 BIN_PATH=../build
-DATASET_NAME=test6
-
-
+DATASET_NAME=zoom-5min-3users-screenshare-trial3
 all: stats.html streams.html meetings.html frames.html
 
 $(DATASET_NAME).zpkt flows.csv rate.csv types.csv: $(DATASET_NAME).pcap

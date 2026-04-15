@@ -6,4 +6,4 @@ ext/include/cxxopts/cxxopts.h
 data/*.csv
 data/*.zpkt
 data/*.html
-data/fig
+data/figdata/*.pcap
