@@ -1,6 +1,6 @@
 
 BIN_PATH=../build
-DATASET_NAME=testNew
+DATASET_NAME=test12
 all: stats.html streams.html meetings.html frames.html
 
 $(DATASET_NAME).zpkt flows.csv rate.csv types.csv: $(DATASET_NAME).pcap
