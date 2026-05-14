@@ -1,0 +1,9 @@
+mode,outer_type,inner_type,pkts,bytes
+srv,5,7,537,72801
+srv,5,10,112,3920
+srv,5,15,788,89391
+srv,5,32,16,720
+srv,5,34,56,4032
+srv,3,NA,120,10680
+srv,4,NA,120,14040
+srv,7,NA,5,425

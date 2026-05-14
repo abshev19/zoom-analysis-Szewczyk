@@ -1,9 +1,9 @@
 BIN_PATH=../build
 TRIALS = 1 2 3
-PCAP_BASE = zoom-5min-p2p-both-devices-stressed-screenshare-trial
+PCAP_BASE = zoom-p2p-5min-screenshare-trial
 
 # Target directory structure
-EXP_DIR = zoom-5min-p2p-both-devices-stressed-screenshare-trials
+EXP_DIR = zoom-p2p-5min-screenshare-trials
 
 all: $(foreach t,$(TRIALS),$(EXP_DIR)/trial$(t)/stats.csv)
 
