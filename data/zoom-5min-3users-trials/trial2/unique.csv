@@ -1,2 +1,0 @@
-stream_id,conn_type,start_ts_s,end_ts_s,ip_src,tp_src,ip_dst,tp_dst,zoom_type,ssrc,start_rtp_ts,end_rtp_ts,pkts,bytes,audio_112_pkts,audio_99_pkts,audio_113_pkts
-0,udp_srv,1776261459,1776261588,192.168.100.69,54641,144.195.33.153,8801,16,16778241,3220177994,3231813014,25194,27080050,0,0,0

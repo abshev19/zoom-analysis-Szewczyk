@@ -1,24 +1,43 @@
-
 BIN_PATH=../build
-DATASET_NAME=zoom-normal-trial1
-all: stats.html streams.html meetings.html frames.html
+TRIALS = 1 2 3
+PCAP_BASE = zoom-5min-p2p-both-devices-stressed-screenshare-trial
 
-$(DATASET_NAME).zpkt flows.csv rate.csv types.csv: $(DATASET_NAME).pcap
-	${BIN_PATH}/zoom_flows -i $< -f flows.csv -t types.csv -r rate.csv -z $@
+# Target directory structure
+EXP_DIR = zoom-5min-p2p-both-devices-stressed-screenshare-trials
 
-pkts.csv streams.csv frames.csv stats.csv: $(DATASET_NAME).zpkt
-	${BIN_PATH}/zoom_rtp -i $< -p pkts.csv -s streams.csv -f frames.csv -t stats.csv
+all: $(foreach t,$(TRIALS),$(EXP_DIR)/trial$(t)/stats.csv)
 
-meetings.csv unique.csv: $(DATASET_NAME).zpkt
-	${BIN_PATH}/zoom_meetings -i $< -m meetings.csv -u unique.csv
+# Pattern rule to process trials
+$(EXP_DIR)/trial%/stats.csv: $(PCAP_BASE)%.pcap
+	@mkdir -p $(EXP_DIR)/trial$*
+	@echo "--- Processing Trial $* ---"
+	
+	# Step 1: Run Cabernet Zoom flows
+	$(BIN_PATH)/zoom_flows -i $< \
+		-f flows.csv -t types.csv -r rate.csv -z $(PCAP_BASE)$*.zpkt
+	
+	# Step 2: Run Cabernet Zoom RTP
+	$(BIN_PATH)/zoom_rtp -i $(PCAP_BASE)$*.zpkt \
+		-p pkts.csv -s streams.csv -f frames.csv -t stats.csv
+	
+	# Step 3: Run Cabernet Zoom Meetings
+	$(BIN_PATH)/zoom_meetings -i $(PCAP_BASE)$*.zpkt \
+		-m meetings.csv -u unique.csv
 
-%.html: %.Rmd %.csv setup.R
-	Rscript -e 'library(rmarkdown); rmarkdown::render("$<")'
+	# Step 4: Render HTML reports
+	-Rscript -e 'library(rmarkdown); rmarkdown::render("stats.Rmd")'
+	-Rscript -e 'library(rmarkdown); rmarkdown::render("streams.Rmd")'
+
+	# Step 5: Move generated .csv and .html files into the trial folder
+	# (Excluded .zpkt from moving)
+	-mv *.csv $(EXP_DIR)/trial$*/
+	-mv *.html $(EXP_DIR)/trial$*/
+	
+	# Optional: Delete the large .zpkt file once the trial is done to save space
+	$(RM) $(PCAP_BASE)$*.zpkt
 
 clean:
-	$(RM) -r fig *.html
+	$(RM) -r $(EXP_DIR)
+	$(RM) *.csv *.zpkt *.html
 
-spotless: clean
-	$(RM) *.csv *.zpkt
-
-.PHONY: all clean spotless
+.PHONY: all clean
