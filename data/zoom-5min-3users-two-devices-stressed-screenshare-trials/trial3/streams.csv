@@ -1,0 +1,2 @@
+rtp_ssrc,media_type,stream_type,ip_src,tp_src,ip_dst,tp_dst,start_ts_s,start_ts_us,end_ts_s,end_ts_us,start_rtp_ts,end_rtp_ts,pkts,bytes
+16778243,s,m,192.168.100.69,62757,144.195.9.245,8801,1778852556,685441,1778852856,368937,2613081324,2640048384,15894,15951666

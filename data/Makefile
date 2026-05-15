@@ -1,9 +1,8 @@
 BIN_PATH=../build
 TRIALS = 1 2 3
-PCAP_BASE =zoom-5min-trial
-
+PCAP_BASE =zoom-5min-3users-two-devices-stressed-screenshare-trial
 # Target directory structure
-EXP_DIR =zoom-5min-trials
+EXP_DIR =zoom-5min-3users-two-devices-stressed-screenshare-trials
 
 all: $(foreach t,$(TRIALS),$(EXP_DIR)/trial$(t)/stats.csv)
 
